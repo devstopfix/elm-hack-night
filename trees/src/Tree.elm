@@ -11,13 +11,47 @@ empty =
     Empty
 
 
+singleton : a -> Tree a
+singleton v = 
+   Node v Empty Empty
 
--- singleton : a -> Tree a
+
+sum : Tree number -> number
+sum t =
+  case t of
+    Empty -> 0
+    Node v l r ->
+        v + sum l + sum r
+
+
+contains : a -> Tree a -> Bool
+contains v tree =
+    case tree of 
+      Empty -> False
+      Node x l r -> 
+        if v == x then
+          True
+        else
+          contains v l || contains v r 
+
+
+flatten : Tree a -> List a
+flatten t = 
+  case t of 
+    Empty -> 
+      []
+    Node v l r -> 
+      flatten l ++ [v] ++ flatten r
+
+
+
 -- insert : comparable -> Tree comparable -> Tree comparable
 -- fromList : List comparable -> Tree comparable
 -- depth : Tree a -> Int
 -- map : (a -> b) -> Tree a -> Tree b
 {-----------------------------------------------------------------
+
+
 
 Exercises:
 
